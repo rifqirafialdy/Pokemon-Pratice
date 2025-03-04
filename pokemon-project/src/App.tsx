@@ -1,6 +1,7 @@
 
 import { Route,Routes } from 'react-router-dom'
 import Home from './pages/Home'
+import DetailsPage from './pages/Details'
 
 function App() {
   
@@ -9,6 +10,7 @@ function App() {
     <div className="max-w-md mx-auto w-full min-h-screen bg-[#252A3E]">
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/details/:id" element={<DetailsPage/>}/>
       </Routes>
     </div>
   )
