@@ -5,7 +5,7 @@ interface Pokemon {
   url: string;
 }
 
-const usePokemonList = (limit: number) => {
+const usePokemonList = (limit: number, sortOption: string) => {
   const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -16,7 +16,20 @@ const usePokemonList = (limit: number) => {
         setLoading(true);
         const res = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}`);
         const data = await res.json();
-        setPokemonList(data.results);
+        let sortedList = [...data.results];
+
+        // Apply sorting
+        if (sortOption === "Sort by Name") {
+          sortedList.sort((a, b) => a.name.localeCompare(b.name));
+        } else if (sortOption === "Sort by ID") {
+          sortedList.sort((a, b) => {
+            const idA = parseInt(a.url.split("/")[6], 10);
+            const idB = parseInt(b.url.split("/")[6], 10);
+            return idA - idB;
+          });
+        }
+
+        setPokemonList(sortedList);
       } catch (err) {
         setError("Failed to fetch Pokémon list");
       } finally {
@@ -25,7 +38,7 @@ const usePokemonList = (limit: number) => {
     };
 
     fetchPokemonList();
-  }, [limit]);
+  }, [limit, sortOption]); 
 
   return { pokemonList, loading, error };
 };

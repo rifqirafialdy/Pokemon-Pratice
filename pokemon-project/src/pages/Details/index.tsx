@@ -20,7 +20,9 @@ const DetailsPage: FC = () => {
           alt={pokemon.name}
           className="w-40 h-40 object-contain"
         />
+        <img src={pokemon.spriteFront} alt="" className="w-10" />
         <p>Type: {pokemon.type}</p>
+        <p>{pokemon.attack}</p>
         <p>ID: #{pokemon.id}</p>
       </div>
     </div>

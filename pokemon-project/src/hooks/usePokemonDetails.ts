@@ -5,6 +5,10 @@ interface PokemonDetails {
   name: string;
   type: string;
   image: string;
+  spriteFront :string;
+  health : number;
+  attack: number;
+  defense: number;
 }
 
 const usePokemonDetails = (url: string) => {
@@ -21,8 +25,12 @@ const usePokemonDetails = (url: string) => {
         setPokemon({
           id: details.id,
           name: details.name,
-          type: details.types[0].type.name, // First type
-          image: details.sprites.other["official-artwork"].front_default, // High-quality image
+          type: details.types[0].type.name, 
+          image: details.sprites.other["official-artwork"].front_default,
+          spriteFront:details.sprites.front_default,
+          health:details.stats.find((stat: any) => stat.stat.name === 'hp').base_stat,
+          attack:details.stats.find((stat: any) => stat.stat.name === 'attack').base_stat,
+          defense:details.stats.find((stat: any) => stat.stat.name === 'defense').base_stat 
         });
       } catch (err) {
         setError("Failed to fetch Pokémon details");

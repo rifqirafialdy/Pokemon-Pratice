@@ -36,16 +36,7 @@ const SortDropdown: FC<SortDropdownProps> = ({ sortOption, setSortOption }) => {
             </button>
           )}
         </MenuItem>
-        <MenuItem>
-          {({ active }) => (
-            <button
-              className={`block w-full px-4 py-2 text-left text-sm ${active ? "bg-gray-100" : "text-gray-700"}`}
-              onClick={() => setSortOption("Sort by Type")}
-            >
-              Sort by Type
-            </button>
-          )}
-        </MenuItem>
+        
       </MenuItems>
     </Menu>
   );

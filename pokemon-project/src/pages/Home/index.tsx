@@ -16,7 +16,7 @@ const Home: FC = () => {
         <SortDropdown sortOption={sortOption} setSortOption={setSortOption} />
         <GridOption isGrid = {isGrid} setIsGrid={setIsGrid}/>
       </div>
-            <PokemonCard isGrid={isGrid}/>
+            <PokemonCard isGrid={isGrid}  sortOption={sortOption}/>
         </div>
     )
 }
