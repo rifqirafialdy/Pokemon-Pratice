@@ -5,8 +5,9 @@ interface Pokemon {
   url: string;
 }
 
-const usePokemonList = (limit: number, sortOption: string) => {
+const usePokemonList = (limit: number, sortOption: string, searchQuery: string) => {
   const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
+  const [filteredPokemonList, setFilteredPokemonList] = useState<Pokemon[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -38,9 +39,21 @@ const usePokemonList = (limit: number, sortOption: string) => {
     };
 
     fetchPokemonList();
-  }, [limit, sortOption]); 
+  }, [limit, sortOption]);
 
-  return { pokemonList, loading, error };
+  useEffect(() => {
+    if (searchQuery) {
+      setFilteredPokemonList(
+        pokemonList.filter((pokemon) =>
+          pokemon.name.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+      );
+    } else {
+      setFilteredPokemonList(pokemonList);
+    }
+  }, [searchQuery, pokemonList]);
+
+  return { pokemonList: filteredPokemonList, loading, error };
 };
 
 export default usePokemonList;

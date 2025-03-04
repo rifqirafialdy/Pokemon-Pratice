@@ -12,8 +12,8 @@ const DetailsPage: FC = () => {
 
   return (
     <div>
-      <Header />
-      <div className="p-5 flex flex-col items-center">
+<Header setSearchQuery={() => {}} />
+<div className="p-5 flex flex-col items-center">
         <h1 className="text-2xl font-bold capitalize">{pokemon.name}</h1>
         <img
           src={pokemon.image}
@@ -23,6 +23,7 @@ const DetailsPage: FC = () => {
         <img src={pokemon.spriteFront} alt="" className="w-10" />
         <p>Type: {pokemon.type}</p>
         <p>{pokemon.attack}</p>
+        <p>{pokemon.health-10}</p>
         <p>ID: #{pokemon.id}</p>
       </div>
     </div>

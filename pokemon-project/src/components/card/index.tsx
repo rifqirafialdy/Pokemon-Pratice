@@ -6,10 +6,11 @@ import usePokemonDetails from "../../hooks/usePokemonDetails";
 interface PokemonCardProps {
   isGrid: boolean;
   sortOption:string;
+  searchQuery:string;
 }
 
-const PokemonCard: FC<PokemonCardProps> = ({ isGrid,sortOption }) => {
-  const { pokemonList, loading, error } = usePokemonList(10,sortOption); // Fetch first 10 Pokémon
+const PokemonCard: FC<PokemonCardProps> = ({ isGrid,sortOption,searchQuery }) => {
+  const { pokemonList, loading, error } = usePokemonList(100,sortOption,searchQuery); 
 
   return (
     <div>
