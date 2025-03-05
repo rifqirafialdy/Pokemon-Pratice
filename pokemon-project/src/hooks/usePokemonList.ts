@@ -5,7 +5,7 @@ interface Pokemon {
   url: string;
 }
 
-const usePokemonList = (limit: number, sortOption: string, searchQuery: string) => {
+const usePokemonList = (limit: number, sortOption: string, searchQuery: string,offset:number) => {
   const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
   const [filteredPokemonList, setFilteredPokemonList] = useState<Pokemon[]>([]);
   const [loading, setLoading] = useState(true);
@@ -15,11 +15,10 @@ const usePokemonList = (limit: number, sortOption: string, searchQuery: string) 
     const fetchPokemonList = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}`);
+        const res = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`);
         const data = await res.json();
         let sortedList = [...data.results];
 
-        // Apply sorting
         if (sortOption === "Sort by Name") {
           sortedList.sort((a, b) => a.name.localeCompare(b.name));
         } else if (sortOption === "Sort by ID") {
@@ -39,7 +38,7 @@ const usePokemonList = (limit: number, sortOption: string, searchQuery: string) 
     };
 
     fetchPokemonList();
-  }, [limit, sortOption]);
+  }, [limit, sortOption,offset]);
 
   useEffect(() => {
     if (searchQuery) {

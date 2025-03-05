@@ -7,10 +7,11 @@ interface PokemonCardProps {
   isGrid: boolean;
   sortOption:string;
   searchQuery:string;
+  offset : number;
 }
 
-const PokemonCard: FC<PokemonCardProps> = ({ isGrid,sortOption,searchQuery }) => {
-  const { pokemonList, loading, error } = usePokemonList(100,sortOption,searchQuery); 
+const PokemonCard: FC<PokemonCardProps> = ({ isGrid,sortOption,searchQuery,offset }) => {
+  const { pokemonList, loading, error } = usePokemonList(10,sortOption,searchQuery,offset); 
 
   return (
     <div>

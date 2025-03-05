@@ -12,7 +12,7 @@ const DetailsPage: FC = () => {
 
   return (
     <div>
-<Header setSearchQuery={() => {}} />
+<Header setSearchQuery={() => {}} isSearchNeed={false} />
 <div className="p-5 flex flex-col items-center">
         <h1 className="text-2xl font-bold capitalize">{pokemon.name}</h1>
         <img
